@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.h2000.isis</groupId>
   <artifactId>isis-jdo-value-mapping</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <properties/>
   <dependencies>
     <dependency>
