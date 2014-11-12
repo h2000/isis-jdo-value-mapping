@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<plugin>
+    <extension point="org.datanucleus.store_mapping">
+        <mapping java-type="org.apache.isis.applib.value.Money" mapping-class="jdo.IsisMoneyMapping"/>
+    </extension>
+</plugin>
