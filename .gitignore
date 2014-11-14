@@ -1,6 +1,7 @@
-.cmvn/
+.
+/target/
+/.settings/
+/.cmvn/
+.cmvn.state
 .classpath
 .project
-.settings/
-.cmvn.state
-target/

@@ -10,7 +10,9 @@ import org.datanucleus.ExecutionContext;
 import org.datanucleus.NucleusContext;
 import org.datanucleus.metadata.AbstractMemberMetaData;
 import org.datanucleus.store.rdbms.RDBMSStoreManager;
+import org.datanucleus.store.rdbms.mapping.MappingManager;
 import org.datanucleus.store.rdbms.mapping.java.SingleFieldMultiMapping;
+import org.datanucleus.store.rdbms.table.Column;
 import org.datanucleus.store.rdbms.table.Table;
 
 public class IsisMoneyMapping extends SingleFieldMultiMapping {
@@ -36,13 +38,29 @@ public class IsisMoneyMapping extends SingleFieldMultiMapping {
 	public void initialize(final RDBMSStoreManager storeMgr, final String type) {
 
 		super.initialize(storeMgr, type);
+
 		addColumns();
 	}
 
-	protected void addColumns() {
+	private void addColumns() {
 
-		addColumns(ClassNameConstants.JAVA_LANG_LONG); // amount
-		addColumns(ClassNameConstants.JAVA_LANG_STRING); // currency
+		// amount
+		addColumns(ClassNameConstants.JAVA_LANG_LONG);
+
+		// currency
+		addColumnWithLength(ClassNameConstants.JAVA_LANG_STRING, 3);
+	}
+
+	public void addColumnWithLength(final String typeName, final int columnLength) {
+
+		final MappingManager mgr = getStoreManager().getMappingManager();
+		Column column = null;
+		if (table != null) {
+			column = mgr.createColumn(this, typeName, getNumberOfDatastoreMappings());
+			/* TODO metaData.setJdbcType("NCHAR") */
+			column.setColumnMetaData(column.getColumnMetaData().setLength(columnLength));
+		}
+		mgr.createDatastoreMapping(this, column, typeName);
 	}
 
 	@Override
