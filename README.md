@@ -2,7 +2,7 @@ isis-jdo-value-mapping
 ======================
 
 JDO type mapping for isis value types:
-- Money
+- Money to two columns Long + String(length=3) 
 
 
 Maven dependency
